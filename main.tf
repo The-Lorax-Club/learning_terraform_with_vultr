@@ -1,24 +1,7 @@
-data "aws_ami" "app_ami" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["979382823631"] # Bitnami
-}
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.app_ami.id
-  instance_type = "t3.nano"
-
-  tags = {
-    Name = "HelloWorld"
-  }
+resource "vultr_instance" "web" {
+  label      = "HelloWorld"
+  plan       = "vhf-1c-1gb"      # Standard Small vcpu 1
+  region     = "chi"             # Example: New Jersey
+  os_id      = "2314"             # Example: Ubuntu 20.04; Replace with your needed OS/app ID
+  enable_ipv6 = false
 }
