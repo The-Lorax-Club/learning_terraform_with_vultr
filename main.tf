@@ -1,7 +1,7 @@
 resource "vultr_instance" "web" {
   label      = "HelloWorld"
   plan       = "vhf-1c-1gb"      # Standard Small vcpu 1
-  region     = "chi"             # Example: New Jersey
-  os_id      = "2314"             # Example: Ubuntu 20.04; Replace with your needed OS/app ID
+  region     = "chi"             # Chicago
+  os_id      = "2314"             # For Ubuntu 24.04 LTS the OS ID is 2314
   enable_ipv6 = false
 }
