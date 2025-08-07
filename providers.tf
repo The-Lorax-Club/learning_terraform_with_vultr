@@ -1,11 +1,11 @@
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
+    vultr = {
+      source  = "hashicorp/vultr"
     }
   }
 }
 
-provider "aws" {
-  region  = "us-west-2"
+provider "vultr" {
+  region  = "chi"
 }
