@@ -7,5 +7,5 @@ terraform {
 }
 
 provider "vultr" {
-  region  = "chi"
+  #pooballs
 }
