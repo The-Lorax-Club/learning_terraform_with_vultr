@@ -5,5 +5,5 @@ variable "vultr_os_ubuntu_id" {
 
 variable "my_public_ip" {
     description = "My Public IP"
-    default = "71.194.141.105/32"
+    default = "71.194.141.105"
 }

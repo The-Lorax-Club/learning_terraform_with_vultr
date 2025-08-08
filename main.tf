@@ -7,7 +7,8 @@ resource "vultr_firewall_rule" "allow_ssh" {
   protocol          = "tcp"
   port              = "22"
   subnet            = var.my_public_ip
-  subnet_size       = 0
+  subnet_size       = 32
+  ip_type           = "v4"
   notes             = "Allow SSH"
 }
 
@@ -16,7 +17,8 @@ resource "vultr_firewall_rule" "allow_http" {
   protocol          = "tcp"
   port              = "80"
   subnet            = var.my_public_ip
-  subnet_size       = 0
+  subnet_size       = 32
+  ip_type           = "v4"
   notes             = "Allow HTTP"
 }
 
