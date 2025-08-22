@@ -1,25 +1,35 @@
-resource "vultr_firewall_group" "web" {
-  description = "Firewall group for HelloWorld"
+resource "vultr_firewall_group" "management" {
+  description = "Firewall group for my IP to reach vultr instances for management"
 }
 
-resource "vultr_firewall_rule" "allow_ssh" {
+resource "vultr_firewall_rule" "allow_ssh_from_my-ip" {
   firewall_group_id = vultr_firewall_group.web.id
   protocol          = "tcp"
   port              = "22"
   subnet            = var.my_public_ip
   subnet_size       = 32
   ip_type           = "v4"
-  notes             = "Allow SSH"
+  notes             = "Allow SSH from My-IP"
 }
 
-resource "vultr_firewall_rule" "allow_http" {
+resource "vultr_firewall_rule" "allow_http_from_my-ip" {
   firewall_group_id = vultr_firewall_group.web.id
   protocol          = "tcp"
   port              = "80"
   subnet            = var.my_public_ip
   subnet_size       = 32
   ip_type           = "v4"
-  notes             = "Allow HTTP"
+  notes             = "Allow HTTP from My-IP"
+}
+
+resource "vultr_firewall_rule" "allow_https_from_my-ip" {
+  firewall_group_id = vultr_firewall_group.web.id
+  protocol          = "tcp"
+  port              = "443"
+  subnet            = var.my_public_ip
+  subnet_size       = 32
+  ip_type           = "v4"
+  notes             = "Allow HTTPS from My-IP"
 }
 
 resource "vultr_instance" "web" {
