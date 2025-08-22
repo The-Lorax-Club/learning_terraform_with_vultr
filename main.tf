@@ -1,9 +1,9 @@
-resource "vultr_firewall_group" "management" {
+resource "vultr_firewall_group" "admin" {
   description = "Firewall group for my IP to reach vultr instances for management"
 }
 
 resource "vultr_firewall_rule" "allow_ssh_from_my-ip" {
-  firewall_group_id = vultr_firewall_group.web.id
+  firewall_group_id = vultr_firewall_group.admin.id
   protocol          = "tcp"
   port              = "22"
   subnet            = var.my_public_ip
@@ -13,7 +13,7 @@ resource "vultr_firewall_rule" "allow_ssh_from_my-ip" {
 }
 
 resource "vultr_firewall_rule" "allow_http_from_my-ip" {
-  firewall_group_id = vultr_firewall_group.web.id
+  firewall_group_id = vultr_firewall_group.admin.id
   protocol          = "tcp"
   port              = "80"
   subnet            = var.my_public_ip
@@ -23,7 +23,7 @@ resource "vultr_firewall_rule" "allow_http_from_my-ip" {
 }
 
 resource "vultr_firewall_rule" "allow_https_from_my-ip" {
-  firewall_group_id = vultr_firewall_group.web.id
+  firewall_group_id = vultr_firewall_group.admin.id
   protocol          = "tcp"
   port              = "443"
   subnet            = var.my_public_ip
@@ -32,11 +32,11 @@ resource "vultr_firewall_rule" "allow_https_from_my-ip" {
   notes             = "Allow HTTPS from My-IP"
 }
 
-resource "vultr_instance" "web" {
-  label             = "HelloWorld"
+resource "vultr_instance" "keycloak" {
+  label             = "keycloak"
   plan              = "vhf-1c-1gb"
   region            = "ord"
   os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
   enable_ipv6       = false
-  firewall_group_id = vultr_firewall_group.web.id
+  firewall_group_id = vultr_firewall_group.admin.id
 }
