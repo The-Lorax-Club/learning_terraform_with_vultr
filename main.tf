@@ -29,7 +29,7 @@ resource "vultr_firewall_rule" "allow_kc_http_from_my-ip" {
   subnet            = var.my_public_ip
   subnet_size       = 32
   ip_type           = "v4"
-  notes             = "Allow HTTP from My-IP"
+  notes             = "Allow KeyCloak HTTP from My-IP"
 }
 
 resource "vultr_firewall_rule" "allow_https_from_my-ip" {
@@ -49,7 +49,7 @@ resource "vultr_firewall_rule" "allow_kc_https_from_my-ip" {
   subnet            = var.my_public_ip
   subnet_size       = 32
   ip_type           = "v4"
-  notes             = "Allow HTTPS from My-IP"
+  notes             = "Allow Keycloak HTTPS from My-IP"
 }
 
 resource "vultr_instance" "iam_server" {
