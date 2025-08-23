@@ -32,8 +32,17 @@ resource "vultr_firewall_rule" "allow_https_from_my-ip" {
   notes             = "Allow HTTPS from My-IP"
 }
 
-resource "vultr_instance" "keycloak" {
+resource "vultr_instance" "iam_server" {
   label             = "keycloak"
+  plan              = "vhf-1c-1gb"
+  region            = "ord"
+  os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
+  enable_ipv6       = false
+  firewall_group_id = vultr_firewall_group.admin.id
+}
+
+resource "vultr_instance" "email_server" {
+  label             = "mailcow"
   plan              = "vhf-1c-1gb"
   region            = "ord"
   os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
