@@ -22,10 +22,30 @@ resource "vultr_firewall_rule" "allow_http_from_my-ip" {
   notes             = "Allow HTTP from My-IP"
 }
 
+resource "vultr_firewall_rule" "allow_kc_http_from_my-ip" {
+  firewall_group_id = vultr_firewall_group.admin.id
+  protocol          = "tcp"
+  port              = "8080"
+  subnet            = var.my_public_ip
+  subnet_size       = 32
+  ip_type           = "v4"
+  notes             = "Allow HTTP from My-IP"
+}
+
 resource "vultr_firewall_rule" "allow_https_from_my-ip" {
   firewall_group_id = vultr_firewall_group.admin.id
   protocol          = "tcp"
   port              = "443"
+  subnet            = var.my_public_ip
+  subnet_size       = 32
+  ip_type           = "v4"
+  notes             = "Allow HTTPS from My-IP"
+}
+
+resource "vultr_firewall_rule" "allow_kc_https_from_my-ip" {
+  firewall_group_id = vultr_firewall_group.admin.id
+  protocol          = "tcp"
+  port              = "8443"
   subnet            = var.my_public_ip
   subnet_size       = 32
   ip_type           = "v4"
