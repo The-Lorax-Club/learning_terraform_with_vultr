@@ -32,6 +32,16 @@ resource "vultr_firewall_rule" "allow_kc_http_from_my-ip" {
   notes             = "Allow KeyCloak HTTP from My-IP"
 }
 
+resource "vultr_firewall_rule" "allow_signoz_http_from_my-ip" {
+  firewall_group_id = vultr_firewall_group.admin.id
+  protocol          = "tcp"
+  port              = "3301"
+  subnet            = var.my_public_ip
+  subnet_size       = 32
+  ip_type           = "v4"
+  notes             = "Allow Keycloak HTTPS from My-IP"
+}
+
 resource "vultr_firewall_rule" "allow_https_from_my-ip" {
   firewall_group_id = vultr_firewall_group.admin.id
   protocol          = "tcp"
@@ -80,7 +90,7 @@ resource "vultr_instance" "observability_server" {
 }
 
 resource "vultr_instance" "firewall" {
-  label             = "iptables"
+  label             = "pfsense"
   plan              = "vhf-1c-1gb"
   region            = "ord"
   os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
