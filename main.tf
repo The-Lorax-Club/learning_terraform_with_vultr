@@ -69,6 +69,7 @@ resource "vultr_instance" "iam_server" {
   os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
   enable_ipv6       = false
   firewall_group_id = vultr_firewall_group.admin.id
+  user_data         = file("${path.module}/scripts/iam_server-init.sh")
 }
 
 resource "vultr_instance" "email_server" {
