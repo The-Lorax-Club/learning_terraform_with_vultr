@@ -69,3 +69,12 @@ resource "vultr_instance" "email_server" {
   enable_ipv6       = false
   firewall_group_id = vultr_firewall_group.admin.id
 }
+
+resource "vultr_instance" "observability_server" {
+  label             = "signoz"
+  plan              = "vhf-1c-1gb"
+  region            = "ord"
+  os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
+  enable_ipv6       = false
+  firewall_group_id = vultr_firewall_group.admin.id
+}
