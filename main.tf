@@ -89,6 +89,17 @@ resource "vultr_instance" "email_server" {
   os_id             = var.vultr_os_ubuntu_id  # If you have a variables.tf
   enable_ipv6       = false
   firewall_group_id = vultr_firewall_group.admin.id
+  user_data         = file("${path.module}/scripts/iam_server-init.sh")
+}
+
+resource "vultr_block_storage" "email_server_storage" {
+  size_gb             = 20          # or whatever size you need
+  region              = "ord"       # must match the instance region
+  label               = "mailcow-data"
+  attached_to_instance = vultr_instance.iam_server.id
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "vultr_instance" "observability_server" {
